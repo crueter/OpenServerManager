@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(ServerUITest VERSION 0.1 LANGUAGES CXX)
+project(OpenServerManager VERSION 0.1 LANGUAGES CXX)
 
 # set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -60,39 +60,39 @@ set(PROJECT_SOURCES
 qt_wrap_ui(SOURCES ${UI})
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(ServerUITest
+    qt_add_executable(OpenServerManager
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET ServerUITest APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET OpenServerManager APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(ServerUITest SHARED
+        add_library(OpenServerManager SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(ServerUITest
+        add_executable(OpenServerManager
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(ServerUITest PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::VirtualKeyboard)
-target_include_directories(ServerUITest PRIVATE "include")
-target_include_directories(ServerUITest PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(OpenServerManager PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::VirtualKeyboard)
+target_include_directories(OpenServerManager PRIVATE "include")
+target_include_directories(OpenServerManager PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ServerUITest)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.OpenServerManager)
 endif()
-set_target_properties(ServerUITest PROPERTIES
+set_target_properties(OpenServerManager PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -101,12 +101,12 @@ set_target_properties(ServerUITest PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS ServerUITest
+install(TARGETS OpenServerManager
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(ServerUITest)
+    qt_finalize_executable(OpenServerManager)
 endif()
