@@ -32,6 +32,8 @@ private:
 
     ServerData m_data;
     int m_idx;
+
+    QString getUser() const;
 };
 
 #endif // SERVERPREVIEW_H

@@ -17,6 +17,7 @@ ConsoleOutputDialog::ConsoleOutputDialog(QProcess *process, QString program, QSt
     connect(process, &QProcess::finished, this, [this, process](int code, QProcess::ExitStatus) {
         ui->buttonBox->setEnabled(true);
     });
+    qDebug() << arguments;
 
     process->start(program, arguments);
 }

@@ -43,7 +43,7 @@ void ServerPreview::updateServer()
 {
     QString program = "ssh";
     QStringList arguments;
-    arguments << m_data.user + "@" + m_data.host << "-p" << QString::number(m_data.port);
+    arguments << getUser() + "@" + m_data.host << "-p" << QString::number(m_data.port);
     arguments << m_data.os.upgradeCmd;
 
     QProcess *process = new QProcess(this);
@@ -55,7 +55,7 @@ void ServerPreview::reboot()
 {
     QString program = "ssh";
     QStringList arguments;
-    arguments << m_data.user + "@" + m_data.host << "-p" << QString::number(m_data.port);
+    arguments << getUser() + "@" + m_data.host << "-p" << QString::number(m_data.port);
     arguments << m_data.os.rebootCmd;
 
     QProcess *process = new QProcess(this);
@@ -98,4 +98,9 @@ void ServerPreview::updateStatus()
             ui->onlineLabel->setText("Offline");
         }
     });
+}
+
+QString ServerPreview::getUser() const
+{
+    return m_data.user.isEmpty() ? "root" : m_data.user;
 }

@@ -3,7 +3,7 @@
 // z
 
 const OperatingSystem Arch{"Arch", "reboot now", "pacman -Syu --noconfirm"};
-const OperatingSystem Debian{"Debian", "reboot now", "apt update && apt upgrade -y"};
+const OperatingSystem Debian{"Debian", "reboot now", "apt update -y -q; apt upgrade -y -q"};
 
 QJsonObject ServerData::toJson() const
 {
@@ -43,9 +43,6 @@ OperatingSystem OperatingSystem::fromString(const QString &string)
     } else if (string == "Debian") {
         return Debian;
     } else {
-        return OperatingSystem{
-            "reboot now",
-            "apt update && apt upgrade -y"
-        };
+        return Debian;
     }
 }
